@@ -29,8 +29,11 @@ app.post('/imagen', async(req, res) => {
     const img = req.files.target_file;
     const posicion = req.body.posicion;
 
-    await img.mv(`static/imgs/imagen-${posicion}.jpg`);
-
+    if (parseInt(posicion) <= 8) {
+        await img.mv(`static/imgs/imagen-${posicion}.jpg`);
+    } else {
+        console.log("Debe ingresar una posicion entre 1 y 8");
+    }
     //res.send('imagen subida de forma exitosa al collage');
     res.redirect('/collage');
 
